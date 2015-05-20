@@ -1,60 +1,72 @@
 #include<iostream>
+#include <stdlib.h>
 //#include<string>
-#include<vector>
+//#include<vector>
 using namespace std;
 
-	struct kino
+struct kino
+{
+	char cinema[30];
+	char film[30];
+	int time[2];
+	int coast;
+};
+
+void getData(kino *item, int N)
+{
+	cin.ignore();
+	for (int i = 0; i < N; i++)
 	{
-		char *cinema;
-		char *film;
-		int timeH;
-		int timeM;
-		int coast;
-	};
-
-	int main()
-	{
-		vector<kino> items;
-		kino item;
-		/*item.(*cinema) = "Indigo";
-		item.film = "Star Wars";
-		item.timeH = 9;
-		item.timeM = 30;
-		item.coast = 300;*/
-		items.push_back(item);
-		char y;
-		do{
-
-			cout << "cinema: ";
-			cin >> item.cinema;
-			cout << "film: ";
-			cin >> item.film;
-			cout << "hours: ";
-			cin >> item.timeH;
-			cout << "minutes: ";
-			cin >> item.timeM;
-			cout << "coast: ";
-			cin >> item.coast;
-			cout << "Add new item? (y/n)" << endl;
-			items.push_back(item);
-			cin >> y;
-		} while (y == 'y');
-		
-
-		cout << "See all items ? (y / n)" << endl;
-		cin >> y;
-		if (y == 'y')
-		{
-			for (int i = 0; i < items.size(); i++)
-			{
-				cout << "seans " << i + 1 << endl;
-				cout << "cinema: " << items[i].cinema << endl;
-				cout << "film: " << items[i].film << endl;
-				cout << "time: " << items[i].timeH << ":" << items[i].timeM << endl;
-				cout << "coast: " << items[i].coast << endl;
-			}
-		}
-		items.clear();
-		system("pause");
-	return 0;
+		cout << "\n";
+		cout << "cinema: ";
+		cin.getline(item[i].cinema,30);
+		cout << "film: ";
+		cin.getline(item[i].film,30);
+		cout << "time: ";
+		cin >> item[i].time[0]; cin.ignore();
+		cin >> item[i].time[1]; cin.ignore();		
+		cout << "coast: ";
+		cin >> item[i].coast;
 	}
+}
+
+void showData(kino *item, int N)
+{
+	for (int i = 0; i < N; i++)
+	{
+		//cout << "seans " << i + 1 << endl;
+		cout << "cinema: " << item[i].cinema << endl;
+		cout << "film: " << item[i].film << endl;
+		cout << "time: " << item[i].time[0] << ":" << item[i].time[1] << endl;
+		cout << "coast: " << item[i].coast << endl;
+	}
+}
+
+int main()
+{
+	int N, C;
+	char y;
+	cout << "N:";
+	cin >> N;
+	//cout << "C:";
+	//cin >> C;
+	kino *item = new kino[N];
+	getData(item, N);
+	
+	/*do
+	{
+		getData(item, N);
+		cout << "Do you want to add new sean? (y/n)";
+		cin >> y;
+	
+	} while (y == 'y');*/
+	/*cout << "Do you want to see all seans? (y/n)";
+	cin >> y;
+	if (y == 'y')
+	{*/
+		showData(item, N);
+	//}
+	delete[]item;
+	system("pause");
+	return 0;
+}
