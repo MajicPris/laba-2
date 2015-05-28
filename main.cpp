@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include <stdlib.h>
 //#include<string>
@@ -17,7 +18,8 @@ void getData(kino *item, int N)
 	cin.ignore();
 	for (int i = 0; i < N; i++)
 	{
-		cout << "\n";
+		cin.ignore();
+		//cout << "\n";
 		cout << "cinema: ";
 		cin.getline(item[i].cinema,30);
 		cout << "film: ";
@@ -44,29 +46,48 @@ void showData(kino *item, int N)
 
 int main()
 {
-	int N, C;
-	char y;
-	cout << "N:";
-	cin >> N;
-	//cout << "C:";
-	//cin >> C;
-	kino *item = new kino[N];
-	getData(item, N);
-	
-	/*do
+	int N, C, len;
+	char str[1000], S, A;
+	cout << "Press S to show seanses, press A to add seanses: ";
+	cin >> S;
+	if (S == 'S')
 	{
+		FILE *fin = fopen("C:\\text.txt", "r");
+		if (fin == NULL){ return 0; }
+		do
+		{
+
+			fgets(str, 1000, fin);
+			cout << str;
+			/*len = strlen(str);
+			for (int i = 0; i < len; i++)
+			{*/
+		} while (!feof(fin));
+	}
+	else if (S == 'A')
+	{
+		cout << "Number of seanses: ";
+		cin >> N;
+		//cout << "C:";
+		//cin >> C;
+		kino *item = new kino[N];
+		getData(item, N);
+
+		/*do
+		{
 		getData(item, N);
 		cout << "Do you want to add new sean? (y/n)";
 		cin >> y;
-	
-	} while (y == 'y');*/
-	/*cout << "Do you want to see all seans? (y/n)";
-	cin >> y;
-	if (y == 'y')
-	{*/
+
+		} while (y == 'y');*/
+		/*cout << "Do you want to see all seans? (y/n)";
+		cin >> y;
+		if (y == 'y')
+		{*/
 		showData(item, N);
-	//}
-	delete[]item;
+		//}
+		delete[]item;
+	}
 	system("pause");
 	return 0;
 }
