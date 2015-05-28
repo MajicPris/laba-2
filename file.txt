@@ -1,0 +1,4 @@
+cinema: Indigo
+film: Star Wars
+time: 9:30
+coast: 300
